@@ -1,0 +1,11 @@
+fastapi[all]
+uvicorn
+sqlalchemy
+alembic
+psycopg2-binary
+redis
+celery[redis]
+python-socketio
+pydantic
+pydantic-settings
+asyncpg
