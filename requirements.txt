@@ -9,3 +9,5 @@ python-socketio
 pydantic
 pydantic-settings
 asyncpg
+python-jose
+passlib

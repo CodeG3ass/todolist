@@ -21,6 +21,13 @@ services:
     env_file:
       - .env
 
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+
   pgadmin4:
       image: elestio/pgadmin:latest
       restart: always
@@ -35,3 +42,4 @@ services:
       
 volumes:
   postgres_data:
+  redis_data:

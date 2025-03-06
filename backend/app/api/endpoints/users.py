@@ -4,6 +4,7 @@ from app.db.session import get_db
 from app.schemas.user import User, UserCreate
 from app.db.models.user import User as UserModel
 from sqlalchemy.future import select
+from app.api.auth import get_password_hash
 #from app.core.security import hash_password  # Предполагается, что у вас есть функция для хеширования паролей
 
 router = APIRouter()
@@ -18,8 +19,8 @@ async def create_user(user: UserCreate, db: AsyncSession = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Username already registered")
 
     
-    
-    db_user = UserModel(**user.model_dump())
+    hashed_password = get_password_hash(user.password)
+    db_user = UserModel(username=user.username, email=user.email, password=hashed_password)
     db.add(db_user)
     await db.commit()
     await db.refresh(db_user)
